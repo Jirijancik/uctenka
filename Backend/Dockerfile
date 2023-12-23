@@ -5,11 +5,14 @@ FROM node:latest
 WORKDIR /app
 
 # Copy package.json and install dependencies
-COPY package.json /app
+COPY package.json ./
+
+# Install dependencies
 RUN yarn install
 
-# Copy the rest of your backend application
-COPY . /app
+# Copy the rest of your frontend application source code
+COPY . .
+
 
 # Expose port and start application
 EXPOSE 5000

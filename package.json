@@ -1,0 +1,16 @@
+{
+  "name": "uctenka-monorepo",
+  "version": "0.0.1",
+  "description": "accounting software",
+  "main": "index.js",
+  "repository": "https://github.com/Jirijancik/uctenka",
+  "author": "Jiri Jancik",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "install": "yarn workspaces install",
+    "dev": "concurrently \"cd frontend && yarn start\" \"cd backend && yarn start\"",
+    "build": "yarn workspaces run build"
+  }
+}

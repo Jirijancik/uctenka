@@ -1,19 +1,11 @@
 {
-  "name": "react-pwa",
-  "version": "2.1.0",
-  "description": "Starter kit for modern web applications",
-  "homepage": "https://react-pwa.surenatoyan.com/",
-  "proxy": "https://ares.gov.cz",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/suren-atoyan/react-pwa.git"
-  },
-  "bugs": {
-    "url": "https://github.com/suren-atoyan/react-pwa/issues",
-    "email": "contact@surenatoyan.com"
-  },
+  "name": "frontend",
+  "version": "0.0.1",
+  "description": "accounting software",
+  "private": true,
   "license": "MIT",
   "scripts": {
+    "start": "vite --host",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
