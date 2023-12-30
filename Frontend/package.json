@@ -32,7 +32,7 @@
     "antd": "^5.12.1",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
-    "is-mobile": "^3.1.1",
+    "is-mobile": "^4.0.0",
     "notistack": "^2.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
