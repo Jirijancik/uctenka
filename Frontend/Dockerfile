@@ -2,7 +2,7 @@
 FROM node:latest
 
 # Set working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy package.json and install dependencies
 COPY package.json ./

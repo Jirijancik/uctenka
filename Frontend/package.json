@@ -5,8 +5,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "vite --host",
-    "dev": "vite",
+    "start": "vite --host --port 3000",
+    "dev": "vite --host --port 3000",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "https-preview": "serve dist",
@@ -21,6 +21,7 @@
     "@mui/material": "^5.10.6",
     "@mui/system": "^5.10.6",
     "@mui/utils": "^5.10.6",
+    "@tanstack/react-query": "^5.0.0",
     "antd": "^5.12.1",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
@@ -31,9 +32,15 @@
     "react-error-boundary": "^4.0.0",
     "react-helmet-async": "^2.0.0",
     "react-hotkeys-hook": "^3.4.7",
-    "@tanstack/react-query": "^5.0.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.4.1",
     "recoil": "^0.7.5"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
+  },
+  "resolutions": {
+    "rollup": "npm:@rollup/wasm-node"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
@@ -63,14 +70,11 @@
     ]
   },
   "author": {
-    "name": "Suren Atoyan",
-    "email": "contact@surenatoyan.com",
-    "url": "http://surenatoyan.com/"
+    "name": "Jiri Jancik"
   },
   "keywords": [
     "react",
     "pwa",
-    "starter-kit",
     "vite"
   ]
 }
