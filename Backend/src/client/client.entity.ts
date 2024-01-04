@@ -1,5 +1,11 @@
 // client.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { ClientEntity } from './client.dto';
 import { User } from 'src/user/user.entity';
 
@@ -44,8 +50,8 @@ export class Client implements ClientEntity {
   @Column()
   fullAddress: string;
 
-    // Many-to-Many relation with User
-    @ManyToMany(() => User)
-    @JoinTable()
-    users: User[];
+  // Many-to-Many relation with User
+  @ManyToMany(() => User)
+  @JoinTable()
+  users: User[];
 }

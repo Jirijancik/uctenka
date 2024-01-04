@@ -6,7 +6,7 @@ export class CreateInvoiceDTO {
   dueDate: Date;
   totalAmount: number;
   taxAmount: number;
-  ownerId: number; 
+  ownerId: number;
   supplierId: number;
   customerId: number;
 }
@@ -18,7 +18,7 @@ export class UpdateInvoiceDTO {
   dueDate: Date;
   totalAmount: number;
   taxAmount: number;
-  ownerId: number; 
+  ownerId: number;
   supplierId: number;
   customerId: number;
 }
@@ -30,7 +30,7 @@ export class PatchInvoiceDTO {
   dueDate?: Date;
   totalAmount?: number;
   taxAmount?: number;
-  ownerId: number; 
+  ownerId: number;
   supplierId: number;
   customerId: number;
 }
@@ -42,7 +42,7 @@ export class GetInvoiceDTO {
   dueDate: Date;
   totalAmount: number;
   taxAmount: number;
-  ownerId: number; 
+  ownerId: number;
   supplierId: number;
   customerId: number;
 }

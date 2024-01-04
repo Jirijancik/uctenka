@@ -47,7 +47,7 @@ export const LoginPage: React.FC = () => {
   return (
     <Row justify={'center'}>
       <Card style={{ width: 650 }}>
-        <Typography.Title>Welcome to Uctenka</Typography.Title>
+        <Typography.Title>Welcome to Uctenka!</Typography.Title>
         <Typography.Title level={4}>Please enter your credentials to login in</Typography.Title>
 
         <Form

@@ -18,13 +18,15 @@ import {
 import { Response } from 'express';
 import { GetUser } from 'src/decorators/getCurrentUser';
 
-
 @Controller('invoices')
 export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) {}
 
   @Post()
-  create(@Body() createInvoiceDto: CreateInvoiceDTO, @GetUser() userId: number) {
+  create(
+    @Body() createInvoiceDto: CreateInvoiceDTO,
+    @GetUser() userId: number,
+  ) {
     return this.invoiceService.create(createInvoiceDto, userId);
   }
 

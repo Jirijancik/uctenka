@@ -23,11 +23,11 @@ export class Invoice {
 
   // Many-to-One Recipient Odběratel
   @ManyToOne(() => Client, (client) => client.id)
-  customer : Client;
+  customer: Client;
 
   // Many-to-One  Dodavatel
   @ManyToOne(() => Client, (client) => client.id)
-  supplier : Client;
+  supplier: Client;
 
   // Many-to-One relation to Client
   @ManyToOne(() => Client, (client) => client.id)

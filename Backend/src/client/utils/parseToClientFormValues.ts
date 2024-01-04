@@ -1,6 +1,8 @@
-import {  ClientFormValues, IARESClientResponse } from '../types';
+import { ClientFormValues, IARESClientResponse } from '../types';
 
-export const parseToClientFormValues = (data: IARESClientResponse): ClientFormValues | null => {
+export const parseToClientFormValues = (
+  data: IARESClientResponse,
+): ClientFormValues | null => {
   if (data.zaznamy && data.zaznamy.length > 0) {
     const firstRecord = data.zaznamy[0];
     return {

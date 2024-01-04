@@ -20,7 +20,13 @@ const TYPE_ORM_MODULE = TypeOrmModule.forRoot({
 });
 
 @Module({
-  imports: [TYPE_ORM_MODULE, UserModule, AuthModule, ClientModule, InvoiceModule],
+  imports: [
+    TYPE_ORM_MODULE,
+    UserModule,
+    AuthModule,
+    ClientModule,
+    InvoiceModule,
+  ],
   // ... other module contents like providers, controllers, etc.
 })
 export class AppModule {}
