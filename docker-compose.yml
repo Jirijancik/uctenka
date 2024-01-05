@@ -7,6 +7,8 @@ services:
     - /usr/src/app/node_modules
     ports:
       - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     depends_on:
       - backend
   backend:
@@ -27,4 +29,6 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - uctenka_db:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
