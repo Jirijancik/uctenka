@@ -1,33 +1,17 @@
-// export class AuthService {
-//   constructor() {
-//     this.userRepository = void 0;
-//     this.jwtService = void 0;
-//     this.userRepository = typeorm.getRepository(User);
-//     this.jwtService = new jwt.JwtService();
-//   }
+import HttpService from './httpService';
 
-//   async validateUser(username, password) {
-//     const user = await this.userRepository.findOne({
-//       where: {
-//         username,
-//       },
-//     });
+class AuthService extends HttpService {
+    constructor() {
+        super('/auth');
+    }
 
-//     if (user && user.password === password) {
-//       const { password, ...result } = user;
-//       return result;
-//     }
+    login = (credentials: { username: string; password: string }): Promise<{ access_token: string }> => {
+        return this.post('login', credentials);
+    };
 
-//     return null;
-//   }
+    register = (userData: { username: string; password: string }): Promise<{ access_token: string }> => {
+        return this.post('register', userData);
+    };
+}
 
-//   async login(user) {
-//     const payload = {
-//       username: user.username,
-//       sub: user.id,
-//     };
-//     return {
-//       access_token: this.jwtService.sign(payload),
-//     };
-//   }
-// }
+export const authService = new AuthService();

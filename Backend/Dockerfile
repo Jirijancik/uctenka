@@ -10,8 +10,6 @@ COPY package.json yarn.lock ./
 # Install dependencies
 RUN yarn install
 
-RUN yarn add bcrypt
-
 # Copy the rest of your frontend application source code
 COPY . .
 

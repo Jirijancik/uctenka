@@ -5,6 +5,7 @@ import { App, Button, Card, Checkbox, Col, Form, Input, Row, Space, Typography }
 import axios from 'axios';
 
 import { useAuth } from '@/store/context/auth';
+import { authService } from '@/api/service/auth';
 
 type FieldType = {
   username: string;
@@ -45,7 +46,7 @@ export const LoginPage: React.FC = () => {
   // get current form fields values
   const fields = form.getFieldsValue();
 
-  const { mutateAsync } = useMutation(sendLoginRequest, {
+  const { mutateAsync } = useMutation(authService.login, {
     onSuccess: ({ access_token }) => {
       // Handle successful response
       notification.success({ message: 'Login successful' });
@@ -58,7 +59,7 @@ export const LoginPage: React.FC = () => {
   });
 
   // register mutation
-  const { mutateAsync: registerMutation } = useMutation(sendRegisterRequest, {
+  const { mutateAsync: registerMutation } = useMutation(authService.register, {
     onSuccess: ({ access_token }) => {
       // Handle successful response
       notification.success({ message: 'Register successful' });
@@ -77,7 +78,7 @@ export const LoginPage: React.FC = () => {
   return (
     <Row justify={'center'}>
       <Card style={{ width: 650 }}>
-        <Typography.Title>Welcome to Uctenka</Typography.Title>
+        <Typography.Title>Welcome to Uctenka!</Typography.Title>
         <Typography.Title level={4}>Please enter your credentials to login in</Typography.Title>
 
         <Form
