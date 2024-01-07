@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation } from 'react-query';
 
-import { App, Button, Card, Checkbox, Form, Input, Row, Typography } from 'antd';
+import { App, Button, Card, Checkbox, Col, Form, Input, Row, Space, Typography } from 'antd';
 import axios from 'axios';
 
 import { useAuth } from '@/store/context/auth';
@@ -24,9 +24,26 @@ const sendLoginRequest = async (data: FieldType) => {
   }
 };
 
+// send register request
+const sendRegisterRequest = async (data: FieldType) => {
+  try {
+    const response = await axios.post(`${API_URL}/auth/register`, data);
+    return response.data;
+  } catch (error) {
+    // You can handle errors more specifically here if you want
+    throw error;
+  }
+};
+
 export const LoginPage: React.FC = () => {
   const { login } = useAuth();
   const { notification } = App.useApp();
+
+  //form
+  const [form] = Form.useForm();
+
+  // get current form fields values
+  const fields = form.getFieldsValue();
 
   const { mutateAsync } = useMutation(sendLoginRequest, {
     onSuccess: ({ access_token }) => {
@@ -37,6 +54,19 @@ export const LoginPage: React.FC = () => {
     onError: (error) => {
       // Handle error response
       console.error('Login failed:', error);
+    },
+  });
+
+  // register mutation
+  const { mutateAsync: registerMutation } = useMutation(sendRegisterRequest, {
+    onSuccess: ({ access_token }) => {
+      // Handle successful response
+      notification.success({ message: 'Register successful' });
+      login?.(access_token);
+    },
+    onError: (error) => {
+      // Handle error response
+      console.error('Register failed:', error);
     },
   });
 
@@ -57,6 +87,7 @@ export const LoginPage: React.FC = () => {
           initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"
+          form={form}
         >
           <Form.Item<FieldType>
             label="Username"
@@ -74,19 +105,25 @@ export const LoginPage: React.FC = () => {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item<FieldType>
-            name="remember"
-            valuePropName="checked"
-            wrapperCol={{ offset: 8, span: 16 }}
-          >
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+          <Row wrap={false} gutter={20}>
+            <Col offset={4}>
+              <Form.Item<FieldType> name="remember" valuePropName="checked">
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+            </Col>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
+            <Col>
+              <Form.Item>
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </Form.Item>
+            </Col>
+
+            <Col>
+              <Button onClick={() => registerMutation(fields)}>Register</Button>
+            </Col>
+          </Row>
         </Form>
       </Card>
     </Row>
