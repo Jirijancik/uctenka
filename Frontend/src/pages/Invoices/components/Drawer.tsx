@@ -19,7 +19,6 @@ export const CreateDrawer: React.FC<CreateDrawerProps> = (props) => {
   const { mutateAsync: createInvoice, isLoading: isCreating } = useCreateInvoice();
 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
     createInvoice(values);
   };
 
@@ -31,7 +30,7 @@ export const CreateDrawer: React.FC<CreateDrawerProps> = (props) => {
       };
     });
   }, [clients]);
-  
+
   return (
     <>
       <Drawer

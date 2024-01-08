@@ -3,23 +3,21 @@ dotenv.config();
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
-const corsOptions: CorsOptions = {
-  allowedHeaders: ['content-type'],
-  origin: 'http://localhost:3000',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-  credentials: true,
-};
+// const corsOptions: CorsOptions = {
+//   allowedHeaders: ['content-type'],
+//   origin: 'http://localhost:3000',
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+//   credentials: true,
+// };
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
-  app.enableCors(corsOptions);
-  console.log(process.env.JWT_SECRET, "xxxxxx");
+  app.enableCors();
 
-  await app.listen(3000);
+  await app.listen(5000);
 }
 bootstrap();

@@ -18,5 +18,7 @@
     "watchFile": "dynamicPriorityPolling",
     "watchDirectory": "dynamicPriorityPolling",
     "excludeDirectories": ["**/node_modules", "dist"]
-  }
+  },
+  // include files to copy to dist folder
+  "include": ["./src/templates/**/*", "src"]
 }
