@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 
 import { Button, Col, DatePicker, Drawer, Form, Input, InputNumber, Row, Space } from 'antd';

@@ -1,7 +1,6 @@
 import React from 'react';
-import { useMutation } from 'react-query';
-
-import { App, Button, Card, Checkbox, Col, Form, Input, Row, Space, Typography } from 'antd';
+import { useMutation } from '@tanstack/react-query';
+import { App, Button, Card, Checkbox, Col, Form, Input, Row,  Typography } from 'antd';
 import axios from 'axios';
 
 import { useAuth } from '@/store/context/auth';

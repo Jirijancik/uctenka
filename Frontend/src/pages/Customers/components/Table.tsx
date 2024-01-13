@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useNavigation } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 

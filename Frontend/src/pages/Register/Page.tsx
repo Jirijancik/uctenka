@@ -1,7 +1,6 @@
 import React from 'react';
-import { useMutation } from 'react-query';
-
-import { Button, Checkbox, Form, Input } from 'antd';
+import { useMutation } from '@tanstack/react-query';
+import { Button, Form, Input } from 'antd';
 import axios from 'axios';
 
 const onFinishFailed = (errorInfo: any) => {
