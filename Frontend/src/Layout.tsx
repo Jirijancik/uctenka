@@ -10,7 +10,7 @@ import { useGetClient } from './api/hooks/client/getClient';
 import routes from './routes';
 import { useAuth } from './store/context/auth';
 import { currentClientState } from './store/currentClient';
-import { FCC } from './types';
+import { FCC } from './@types/types';
 
 const { Header, Content, Footer, Sider } = Layout;
 

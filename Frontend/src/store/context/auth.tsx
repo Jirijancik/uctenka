@@ -1,7 +1,7 @@
 // AuthContext.js
 import { createContext, useContext, useState } from 'react';
 
-import { FCC } from '@/types';
+import { FCC } from '@/@types/types';
 import { useNavigate } from 'react-router-dom';
 
 export type AuthContextType = {

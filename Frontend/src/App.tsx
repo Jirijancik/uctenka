@@ -1,3 +1,4 @@
+import './i18n/config';
 import { Fragment } from 'react';
 import { withErrorHandler } from '@/error-handling';
 import AppErrorBoundaryFallback from '@/error-handling/fallbacks/App';
@@ -13,6 +14,7 @@ function App() {
   // message.success('Good!');
   // notification.info({ message: 'Good' });
   // modal.warning({ title: 'Good' });
+
 
   return (
     <Fragment>
