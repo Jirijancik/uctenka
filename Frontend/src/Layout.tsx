@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import { LogoutOutlined } from '@ant-design/icons';
-import { Button, Col, Layout, Menu, Row, Space, Typography, theme } from 'antd';
+import { Button, Col, Layout, Menu, Row, Select, Space, Typography, theme } from 'antd';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
 
 import { useGetClient } from './api/hooks/client/getClient';
@@ -11,6 +11,9 @@ import routes from './routes';
 import { useAuth } from './store/context/auth';
 import { currentClientState } from './store/currentClient';
 import { FCC } from './@types/types';
+
+import {  Trans } from 'react-i18next';
+import { useLocale } from './hooks/useLocale';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -40,8 +43,10 @@ export const AppLayout: FCC = ({ children }) => {
 
   const { logout, authToken } = useAuth();
 
+  const { changeLocale, locale } = useLocale();
+
   const location = useLocation();
-  
+
   const navigate = useNavigate();
 
   const current_client_id = useMemo(() => sessionStorage.getItem('current_client_id'), []);
@@ -67,13 +72,13 @@ export const AppLayout: FCC = ({ children }) => {
       : items.filter(({ isCommon }) => isCommon)
   ).filter((route) => !route?.isHidden);
 
-
   const handleLogout = () => {
     logout?.();
     navigate('/login');
     setCurrentClient(null);
     sessionStorage.removeItem('current_client_id');
   };
+
 
   return (
     <Layout hasSider>
@@ -102,15 +107,27 @@ export const AppLayout: FCC = ({ children }) => {
           <Row justify={'space-between'} align={'middle'}>
             <Col>
               <Typography.Title style={{ margin: 0, paddingLeft: 16 }} level={3}>
-                {currentClient?.businessName ?? 'Dashboard'}
+                {currentClient?.businessName ?? <Trans i18nKey="userMessagesUnread" />}
               </Typography.Title>
             </Col>
+            <Space direction="horizontal">
+              <Col style={{ margin: 0, paddingRight: 16 }}>
+                <Select
+                  options={[
+                    { label: '🇬🇧', value: 'en' },
+                    { label: "🇨🇿", value: 'cs' },
+                  ]}
+                  value={locale}
+                  onChange={(newLocale) => changeLocale(newLocale)}
+                ></Select>
+              </Col>
 
-            <Col style={{ margin: 0, paddingRight: 16 }}>
-              <Button icon={<LogoutOutlined />} onClick={handleLogout}>
-                Logout
-              </Button>
-            </Col>
+              <Col style={{ margin: 0, paddingRight: 16 }}>
+                <Button icon={<LogoutOutlined />} onClick={handleLogout}>
+                  Logout
+                </Button>
+              </Col>
+            </Space>
           </Row>
         </Header>
         <Content style={{ margin: '24px 16px 0', height: 'max-content' }}>{children}</Content>
