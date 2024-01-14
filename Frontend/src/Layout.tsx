@@ -12,7 +12,7 @@ import { useAuth } from './store/context/auth';
 import { currentClientState } from './store/currentClient';
 import { FCC } from './@types/types';
 
-import {  Trans } from 'react-i18next';
+import { Trans } from 'react-i18next';
 import { useLocale } from './hooks/useLocale';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -79,7 +79,6 @@ export const AppLayout: FCC = ({ children }) => {
     sessionStorage.removeItem('current_client_id');
   };
 
-
   return (
     <Layout hasSider>
       <Sider
@@ -115,7 +114,7 @@ export const AppLayout: FCC = ({ children }) => {
                 <Select
                   options={[
                     { label: '🇬🇧', value: 'en' },
-                    { label: "🇨🇿", value: 'cs' },
+                    { label: '🇨🇿', value: 'cs' },
                   ]}
                   value={locale}
                   onChange={(newLocale) => changeLocale(newLocale)}

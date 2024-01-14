@@ -22,7 +22,7 @@ export class User {
   password: string;
 
   //email
-  @Column({ length: 255 })
+  @Column({ length: 255, unique: true })
   @IsEmail()
   email: string;
 

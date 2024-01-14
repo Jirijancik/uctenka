@@ -27,13 +27,6 @@ export class UserService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-
-    const errors = await validate(createUserDto);
-    if (errors.length > 0) {
-      // Throw a custom exception that can be handled by NestJS's exception filters
-      throw new ValidationException(errors);
-    }
-
     // 10 is the salt rounds
     const hashedPassword = await bcrypt.hashSync(createUserDto.password, 10);
 
@@ -41,6 +34,14 @@ export class UserService {
       ...createUserDto,
       password: hashedPassword,
     });
+
+    const errors = await validate(newUser);
+
+    if (errors.length > 0) {
+      // Throw a custom exception that can be handled by NestJS's exception filters
+      throw new ValidationException(errors);
+    }
+
 
     return this.usersRepository.save(newUser);
   }
