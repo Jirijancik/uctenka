@@ -1,11 +1,15 @@
+import { UserRole } from "./user.entity";
+
 export class UserDto {
   id: number;
   username: string;
-  // Add other user properties, but exclude the password
+  email: string;
+  role: UserRole;
 }
 
 export class CreateUserDto {
   username: string;
   password: string;
-  // Add other user properties, but exclude the password
+  email: string;
+  role: UserRole;
 }
