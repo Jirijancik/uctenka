@@ -5,6 +5,8 @@ import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './user.dto';
 import * as bcrypt from 'bcryptjs';
+import { validate } from 'class-validator';
+import { ValidationException } from 'src/exceptions/validation';
 
 @Injectable()
 export class UserService {
@@ -25,6 +27,13 @@ export class UserService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+
+    const errors = await validate(createUserDto);
+    if (errors.length > 0) {
+      // Throw a custom exception that can be handled by NestJS's exception filters
+      throw new ValidationException(errors);
+    }
+
     // 10 is the salt rounds
     const hashedPassword = await bcrypt.hashSync(createUserDto.password, 10);
 

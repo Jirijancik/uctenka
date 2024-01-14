@@ -14,7 +14,7 @@ export class Client implements ClientEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({unique: true})
   identificationNumber: string;
 
   @Column()
@@ -26,7 +26,7 @@ export class Client implements ClientEntity {
   @Column()
   establishmentDate: string; // Consider using Date type
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: 'varchar', nullable: true, unique: true })
   taxIdentificationNumber: string | null;
 
   @Column()
