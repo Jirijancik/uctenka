@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { ClientEntity } from './client.dto';
 import { User } from 'src/user/user.entity';
+import { IsNotEmptyRelation } from 'src/validators/IsNotEmptyRelation';
 
 @Entity()
 export class Client implements ClientEntity {
@@ -51,7 +52,13 @@ export class Client implements ClientEntity {
   fullAddress: string;
 
   // Many-to-Many relation with User
+  // Users can have assigned multiple clients
   @ManyToMany(() => User)
-  @JoinTable()
+  @JoinTable({
+    name: 'client_users_users', // Join table name
+    joinColumn: { name: 'clientId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'usersId', referencedColumnName: 'id' } // Note the column name
+  })
+  @IsNotEmptyRelation({ message: 'A client must be associated with at least one user.' })
   users: User[];
 }

@@ -4,6 +4,9 @@ import { Repository } from 'typeorm';
 import { Client } from './client.entity';
 import { parseToClientFormValues } from './utils/parseToClientFormValues';
 import { ClientFormValues, IARESClientResponse } from './types';
+import { User } from 'src/user/user.entity';
+import { validate } from 'class-validator';
+import { ValidationException } from 'src/exceptions/validation';
 
 @Injectable()
 export class ClientService {
@@ -12,18 +15,32 @@ export class ClientService {
     private clientsRepository: Repository<Client>,
   ) {}
 
-  async create(clientData: Client): Promise<Client> {
+  async create(clientData: Client, currentUser: User): Promise<Client> {
     const newClient = this.clientsRepository.create(clientData);
+
+    // If users is not already initialized in the clientData, initialize it here
+    if (!newClient.users) {
+      newClient.users = [];
+    }
+
+    // Add the current user to the new client's users collection
+    newClient.users.push(currentUser);
+
+    const errors = await validate(newClient);
+
+    if (errors.length > 0) {
+      // Throw a custom exception that can be handled by NestJS's exception filters
+      throw new ValidationException(errors);
+    }
+
     return this.clientsRepository.save(newClient);
   }
 
-  async findAll(fields?: string[]): Promise<Client[]> {
+  async findAll(userId: User['id'], fields?: string[]): Promise<Client[]> {
+    console.log("🚀 ~ ClientService ~ findAll ~ userId:", userId)
     if (!fields || fields.length === 0) {
       return this.clientsRepository.find();
     }
-
-    // Ensure that only valid fields are selected
-    // const validFields = ['id', 'name']; // Add other valid field names as necessary
 
     const metadata = this.clientsRepository.metadata;
     const validFields = metadata.columns.map((column) => column.propertyName);
@@ -32,9 +49,15 @@ export class ClientService {
       validFields.includes(field),
     );
 
+    // SELECT * FROM client
+    // INNER JOIN client_users_users ON client.id = client_users_users."clientId"
+    // WHERE client_users_users."usersId" = 17
+    // TODO: FIX THIS GODDAMN QUERY
     // Query the database for clients with only the selected fields
     return this.clientsRepository
       .createQueryBuilder('client')
+      .innerJoin('client.clientUsersUsers', 'client_users_users')
+      .where('client_users_users.usersId = :userId', { userId })
       .select(fieldsToSelect.map((field) => `client.${field}`))
       .getMany();
   }

@@ -1,6 +1,7 @@
 // src/users/entities/user.entity.ts
 import { IsEmail } from 'class-validator';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Client } from 'src/client/client.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 
 export enum UserRole {
   Admin = 'admin',
@@ -29,8 +30,11 @@ export class User {
   @Column({
     type: 'enum',
     enum: UserRole,
-    default: UserRole.User
+    default: UserRole.User,
   })
   role: UserRole;
   // Add other fields here as needed
+
+  @ManyToMany(() => Client, (client) => client.users)
+  clients: Client[];
 }

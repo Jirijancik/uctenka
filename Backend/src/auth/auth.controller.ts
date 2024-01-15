@@ -12,7 +12,7 @@ export class AuthController {
     private usersService: UserService,
   ) {}
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(LocalAuthGuard) // Apply the JWT guard
   @Post('login')
   async login(@Request() req) {
     return this.authService.login(req.user);
