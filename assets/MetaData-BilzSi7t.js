@@ -1,0 +1,1 @@
+import{j as t}from"./index-CPp3-wTk.js";const a=({title:e,noIndex:n})=>t.jsxs(t.Fragment,{children:[t.jsx("title",{children:`${e?e+" |":""} Nexus - Admin & Client Dashboard`}),n&&t.jsx("meta",{name:"robots",content:"noindex","data-rh":"true"})]});export{a as M};
