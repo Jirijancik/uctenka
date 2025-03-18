@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { ReactNode } from "react";
+import { Link } from "react-router";
 
 export type IBreadcrumbItem = {
     label: string;
@@ -23,13 +23,13 @@ export const PageTitle = ({ title, items, centerItem }: IPageTitle) => {
                     <div className="breadcrumbs hidden p-0 text-sm sm:inline">
                         <ul>
                             <li>
-                                <Link href="/dashboards/ecommerce">Nexus</Link>
+                                <Link to="/dashboards/ecommerce">Nexus</Link>
                             </li>
                             {items.map((item, index) => {
                                 return (
                                     <li key={index} className={`${item.active ? "opacity-80" : ""}`}>
                                         {item.path ? (
-                                            <Link key={index + 1} href={item.path}>
+                                            <Link key={index + 1} to={item.path}>
                                                 {item.label}
                                             </Link>
                                         ) : (

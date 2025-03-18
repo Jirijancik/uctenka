@@ -1,22 +1,29 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import js from "@eslint/js";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-});
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default [
-    ...compat.extends("next/core-web-vitals", "next/typescript"),
+export default tseslint.config(
+    { ignores: ["dist"] },
     {
+        extends: [js.configs.recommended, ...tseslint.configs.recommended],
+        files: ["**/*.{ts,tsx}"],
+        languageOptions: {
+            ecmaVersion: 2020,
+            globals: globals.browser,
+        },
+        plugins: {
+            "react-hooks": reactHooks,
+            "react-refresh": reactRefresh,
+        },
         rules: {
-            "react-hooks/exhaustive-deps": "off",
-            "@next/next/no-img-element": "off",
-            "react/no-unescaped-entities": "off",
+            ...reactHooks.configs.recommended.rules,
+            "@typescript-eslint/no-explicit-any": "off",
+            "@typescript-eslint/no-unused-vars": "off",
+            "@typescript-eslint/ban-ts-comment": "off",
+            "prefer-const": "off",
+            "react-refresh/only-export-components": "off",
         },
     },
-];
+);

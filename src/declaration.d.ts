@@ -4,7 +4,10 @@ import {
     type ApexStroke as ApexStrokeType,
 } from "apexcharts";
 
+declare module "path";
+
 declare module "filepond-plugin-image-preview";
+declare module "nice-select2";
 
 declare module "apexcharts" {
     type ApexGrid = ApexGridType & {
@@ -22,7 +25,7 @@ declare module "apexcharts" {
 
 declare global {
     interface Window {
-        ApexCharts: unknown;
+        ApexCharts: any;
     }
 }
 

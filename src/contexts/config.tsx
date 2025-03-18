@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactNode, createContext, useContext, useEffect, useMemo } from "react";
 
 import { useLocalStorage } from "@/hooks/use-local-storage";
@@ -31,11 +29,12 @@ const useHook = () => {
             updateConfig({ fullscreen: fullscreenMedia.matches });
         };
         fullscreenMedia.addEventListener("change", fullscreenListener);
-        // fullscreenListener();
+        fullscreenListener();
 
         return () => {
             fullscreenMedia.removeEventListener("change", fullscreenListener);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const htmlRef = useMemo(() => typeof window !== "undefined" && document.documentElement, []);

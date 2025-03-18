@@ -32,7 +32,7 @@ npm run dev
 
 ```
 npm run build
-npm run start
+npm run preview
 ```
 
 ### Using Yarn
@@ -53,7 +53,7 @@ yarn dev
 
 ```
 yarn build
-yarn start
+yarn preview
 ```
 
 ### Using Bun
@@ -74,7 +74,7 @@ bun run dev
 
 ```
 bun run build
-bun run start
+bun run preview
 ```
 
 Note: It is compatible with all 3 major package managers (NPM, Yarn & Bun)

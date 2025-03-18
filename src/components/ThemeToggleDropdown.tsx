@@ -1,5 +1,3 @@
-"use client";
-
 import { useConfig } from "@/contexts/config";
 
 type IThemeToggleDropdown = {
